@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sync Obby Lab</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-badge">🎮</div>
+        <div>
+          <h1>Sync Obby Lab</h1>
+          <p>Дизайн • Нейросети • Python • Общая игра</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div id="meBadge" class="chip"></div>
+        <div id="stagePill" class="chip chip-primary">Этап</div>
+        <div id="completionPill" class="chip">Готово: 0/0</div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section id="joinScreen" class="panel active">
+        <div class="panel-header">
+          <h2>Вход в урок</h2>
+          <p>Сначала выберите роль. Дальше всё переключает преподаватель.</p>
+        </div>
+
+        <div class="grid-2">
+          <button id="roleTeacherBtn" class="role-card">
+            <span class="emoji">👩‍🏫</span>
+            <strong>Преподаватель</strong>
+            <span>Управляет этапами и запуском игры</span>
+          </button>
+
+          <button id="roleStudentBtn" class="role-card">
+            <span class="emoji">🧒</span>
+            <strong>Ученик</strong>
+            <span>Проходит этапы синхронно со всеми</span>
+          </button>
+        </div>
+
+        <div class="join-form">
+          <label>Ваше имя</label>
+          <input id="nameInput" type="text" maxlength="24" placeholder="Например: Лиза" />
+          <div id="teacherPinWrap" class="hidden">
+            <label>PIN преподавателя</label>
+            <input id="teacherPinInput" type="password" placeholder="1234" />
+          </div>
+          <button id="joinBtn" class="btn btn-primary" disabled>Войти</button>
+          <div id="joinError" class="error-text"></div>
+        </div>
+      </section>
+
+      <section id="lessonScreen" class="panel hidden">
+        <div id="teacherPanel" class="teacher-panel hidden"></div>
+
+        <div class="content-grid">
+          <section class="panel stage-panel">
+            <div id="stageBody"></div>
+          </section>
+
+          <aside class="panel side-panel">
+            <div class="side-block">
+              <h3>Участники</h3>
+              <div id="studentsList" class="students-list"></div>
+            </div>
+            <div class="side-block">
+              <h3>Выбранные препятствия</h3>
+              <div id="pickedList" class="picked-list"></div>
+            </div>
+            <div class="side-block">
+              <h3>Подсказка</h3>
+              <div id="hintBox" class="hint-box">
+                Всё идёт синхронно: ждите перехода от преподавателя 👌
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <section id="gameWrap" class="panel hidden">
+          <div class="game-head">
+            <h3>Общая 2D игра</h3>
+            <p>Стрелки ← → и пробел / ↑ для прыжка</p>
+          </div>
+          <canvas id="gameCanvas" width="1100" height="360"></canvas>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
